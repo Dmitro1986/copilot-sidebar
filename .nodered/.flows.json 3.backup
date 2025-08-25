@@ -1,0 +1,128 @@
+[
+    {
+        "id": "b07d4603f9e21fa9",
+        "type": "tab",
+        "label": "Поток 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "322b6e2d609d0b89",
+        "type": "tab",
+        "label": "Поток 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "12ddb6bbd6271b2e",
+        "type": "ollama-config-server",
+        "host": "192.168.50.250",
+        "port": 11434
+    },
+    {
+        "id": "f98877e7cad55087",
+        "type": "ollama-list",
+        "z": "b07d4603f9e21fa9",
+        "name": "Ollama List Local Models",
+        "server": "12ddb6bbd6271b2e",
+        "x": 330,
+        "y": 340,
+        "wires": [
+            [
+                "29841f89e962ac5d"
+            ]
+        ]
+    },
+    {
+        "id": "b367bf20d1c9adf9",
+        "type": "inject",
+        "z": "b07d4603f9e21fa9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 340,
+        "wires": [
+            [
+                "f98877e7cad55087"
+            ]
+        ]
+    },
+    {
+        "id": "29841f89e962ac5d",
+        "type": "debug",
+        "z": "b07d4603f9e21fa9",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d6afcda2181e3740",
+        "type": "inject",
+        "z": "322b6e2d609d0b89",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Hello",
+        "payloadType": "str",
+        "x": 70,
+        "y": 100,
+        "wires": [
+            [
+                "cab61c8b1cd6b4fe"
+            ]
+        ]
+    },
+    {
+        "id": "cab61c8b1cd6b4fe",
+        "type": "debug",
+        "z": "322b6e2d609d0b89",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 100,
+        "wires": []
+    }
+]

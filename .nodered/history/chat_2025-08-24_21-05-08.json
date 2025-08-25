@@ -1,0 +1,10 @@
+[
+  {
+    "timestamp": "2025-08-24T18:05:08.241Z",
+    "user": "привет",
+    "assistant": "Привет! Как я могу помочь с Node‑RED сегодня?",
+    "hasFlowContext": false,
+    "provider": "ollama",
+    "model": "gpt-oss:20b"
+  }
+]

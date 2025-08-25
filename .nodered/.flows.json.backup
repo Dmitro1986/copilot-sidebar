@@ -1,0 +1,158 @@
+[
+    {
+        "id": "b07d4603f9e21fa9",
+        "type": "tab",
+        "label": "Поток 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b367bf20d1c9adf9",
+        "type": "inject",
+        "z": "b07d4603f9e21fa9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "29841f89e962ac5d",
+        "type": "debug",
+        "z": "b07d4603f9e21fa9",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a6e974747930c682",
+        "type": "debug",
+        "z": "b07d4603f9e21fa9",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 660,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "db34a37113c60a6e",
+        "type": "function",
+        "z": "b07d4603f9e21fa9",
+        "name": "function 1",
+        "func": "msg.modelName = msg.payload.models[0].name;\n   return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 420,
+        "wires": [
+            [
+                "a6e974747930c682"
+            ]
+        ]
+    },
+    {
+        "id": "e98bb44c480f9ce2",
+        "type": "json",
+        "z": "b07d4603f9e21fa9",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 530,
+        "y": 340,
+        "wires": [
+            [
+                "29841f89e962ac5d"
+            ]
+        ]
+    },
+    {
+        "id": "ac4ede7906252135",
+        "type": "function",
+        "z": "b07d4603f9e21fa9",
+        "name": "function 2",
+        "func": "msg.payload = msg.payload.filter(m => m.name.startsWith('gpt'));\n   return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 600,
+        "wires": [
+            [
+                "b07a3d1a8ff6605e"
+            ]
+        ]
+    },
+    {
+        "id": "b07a3d1a8ff6605e",
+        "type": "debug",
+        "z": "b07d4603f9e21fa9",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "fdab23481e0ed24c",
+        "type": "debug",
+        "z": "b07d4603f9e21fa9",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 260,
+        "y": 520,
+        "wires": []
+    }
+]

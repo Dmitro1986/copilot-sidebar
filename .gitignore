@@ -1,0 +1,14 @@
+# Файл .gitignore
+
+# Зависимости
+node_modules/
+
+# Пользовательские данные и секреты
+#.node-red/
+#flows_cred.json
+#*.log
+
+# Файлы IDE
+#.vscode/
+#.idea/
+

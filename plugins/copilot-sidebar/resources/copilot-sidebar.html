@@ -1,0 +1,105 @@
+<!-- copilot-sidebar.html -->
+
+<script type="text/javascript">
+    (function() {
+        // Регистрируем боковую панель при загрузке Node-RED
+        RED.events.on("runtime-event", function(event) {
+            if (event.id === "runtime-state" && event.payload === "start") {
+                initializeCopilotSidebar();
+            }
+        });
+
+        // Если runtime уже запущен
+        if (RED.state && RED.state() === "start") {
+            setTimeout(initializeCopilotSidebar, 1000);
+        }
+
+        function initializeCopilotSidebar() {
+            // Создаем боковую панель
+            const copilotSidebar = $('<div id="copilot-sidebar-content"></div>');
+            
+            // Регистрируем панель в sidebar
+            RED.sidebar.addTab({
+                id: "copilot",
+                label: "Copilot",
+                name: "🤖 Copilot",
+                content: copilotSidebar,
+                closeable: false,
+                visible: true,
+                iconClass: "fa fa-magic"
+            });
+
+            // Загружаем ресурсы панели
+            loadCopilotResources();
+            
+            console.log("🤖 Copilot sidebar initialized");
+        }
+
+        function loadCopilotResources() {
+            // Загружаем CSS
+            if (!$('#copilot-sidebar-css').length) {
+                $('<link>')
+                    .attr('rel', 'stylesheet')
+                    .attr('type', 'text/css')
+                    .attr('id', 'copilot-sidebar-css')
+                    .attr('href', 'node-red-contrib-copilot-sidebar/resources/copilot-panel.css')
+                    .appendTo('head');
+            }
+
+            // Загружаем конфигурацию моделей
+            const loadModelsConfig = () => {
+                return $.getScript('node-red-contrib-copilot-sidebar/resources/models-config.js');
+            };
+
+            // Загружаем менеджер моделей
+            const loadModelManager = () => {
+                return $.getScript('node-red-contrib-copilot-sidebar/resources/model-manager.js');
+            };
+
+            // Загружаем основной JS
+            const loadMainPanel = () => {
+                return $.getScript('node-red-contrib-copilot-sidebar/resources/copilot-panel.js');
+            };
+
+            // Последовательная загрузка ресурсов
+            loadModelsConfig()
+                .then(loadModelManager)
+                .then(loadMainPanel)
+                .done(function() {
+                    console.log("✅ Copilot panel resources loaded");
+                    initializeCopilotPanel();
+                })
+                .fail(function() {
+                    console.error("❌ Failed to load Copilot panel resources");
+                });
+        }
+
+        function initializeCopilotPanel() {
+            if (window.CopilotPanel) {
+                window.copilotPanel = new CopilotPanel('copilot-sidebar-content');
+                window.copilotPanel.initialize();
+            }
+        }
+    })();
+</script>
+
+<script type="text/html" data-template-name="copilot-sidebar">
+    <!-- Скрытый узел, не отображается в палитре -->
+    <div style="display: none;">
+        <div class="form-row">
+            <label>Copilot Sidebar Plugin</label>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="copilot-sidebar">
+    <p>🤖 Copilot Sidebar Plugin для Node-RED</p>
+    <p>Добавляет интеллектуальную панель анализа в боковую панель Node-RED.</p>
+</script>
+
+<style>
+    /* Скрываем этот узел из палитры */
+    .red-ui-palette-node[data-palette-type="copilot-sidebar"] {
+        display: none !important;
+    }
+</style>

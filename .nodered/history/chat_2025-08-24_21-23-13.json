@@ -1,0 +1,10 @@
+[
+  {
+    "timestamp": "2025-08-24T18:23:13.987Z",
+    "user": "как Включить admin API",
+    "assistant": "### Как включить Admin API в Node‑RED\n\n1. **Найдите файл `settings.js`**  \n   Он находится в каталоге, где запущен Node‑RED (обычно `~/.node-red`).\n\n2. **Разкомментируйте/добавьте секцию `adminAuth`**  \n   ```js\n   // Если строка закомментирована, удалите `//` и настройте:\n   adminAuth: {\n       type: \"credentials\",\n       users: [{\n           username: \"admin\",\n           password: \"$2b$08$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\", // bcrypt‑хеш\n           permissions: \"*\"\n       }]\n   },\n   ```\n   *Если вы хотите оставить API открытым (не рекомендуется в продакшене), просто закомментируйте `adminAuth` полностью.*\n\n3. **Проверьте/установите `httpAdminRoot`**  \n   По умолчанию API доступен по `/admin`. Если вы хотите изменить путь, добавьте:\n   ```js\n   httpAdminRoot: \"/admin\",\n   ```\n\n4. **Перезапустите Node‑RED**  \n   ```bash\n   node-red-stop\n   node-red-start\n   ```\n\n5. **Проверьте доступ**  \n   Откройте браузер: `http://<host>:<port>/admin`  \n   Если вы настроили `adminAuth`, будет запрос логина/пароля.\n\n---\n\n#### Быстрый тест через `curl`\n\n```bash\n# Без аутентификации (если adminAuth отключен)\ncurl http://localhost:1880/admin/flows\n\n# С аутентификацией\ncurl -u admin:yourPassword http://localhost:1880/admin/flows\n```\n\n---\n\n#### Что дальше?\n\n- **Безопасность** – всегда защищайте Admin API паролем, особенно если Node‑RED доступен из сети.  \n- **Права** – в `permissions` можно задать `\"*\"` (полный доступ) или конкретные права, например `\"read\"`/`\"write\"`.  \n- **Расширения** – для работы с API из потоков можно использовать узел `node-red-contrib-admin` (или написать свой HTTP‑request).\n\n---\n\n**Кратко:**  \n1. Откройте `settings.js`.  \n2. Добавьте/разкомментируйте `adminAuth`.  \n3. Перезапустите Node‑RED.  \n4. Проверьте доступ по `http://<host>:<port>/admin`.  \n\nТеперь Admin API включён и готов к использованию!",
+    "hasFlowContext": true,
+    "provider": "ollama",
+    "model": "gpt-oss:20b"
+  }
+]

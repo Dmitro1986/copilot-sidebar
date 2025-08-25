@@ -1,0 +1,9 @@
+[
+  {
+    "timestamp": "2025-08-23T18:36:23.745Z",
+    "user": "сколько у меня потоков?",
+    "assistant": "У вас **2 потока**.",
+    "hasFlowContext": true,
+    "model": "gpt-oss:20b"
+  }
+]

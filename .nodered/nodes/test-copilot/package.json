@@ -1,0 +1,9 @@
+{
+  "name": "test-copilot",
+  "version": "1.0.0",
+  "node-red": {
+    "nodes": {
+      "test-copilot": "test-copilot.js"
+    }
+  }
+}
